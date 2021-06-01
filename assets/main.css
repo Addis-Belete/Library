@@ -4,10 +4,37 @@
   font-weight: 600;
   margin-bottom: 20px;
   padding: 20px;
-  text-align: center;
-}
+  text-align: center; }
 
 .cart {
   height: 50vh;
   display: block;
-}
+  width: 50%;
+  margin: 0 auto; }
+  .cart form label {
+    color: orange;
+    height: 40px;
+    font-size: 25px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600; }
+  .cart form input {
+    width: 500px;
+    margin: 15px 0;
+    padding: 7px 10px;
+    border-radius: 10px; }
+  .cart form button {
+    font-weight: 800;
+    color: orange;
+    border-radius: 6px;
+    width: 170px;
+    height: 40px;
+    font-size: 25px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 20px;
+    background-color: #daf6e6;
+    border: none; }
+  .cart form button:hover {
+    color: #a17362; }
+
+/*# sourceMappingURL=main.css.map */
