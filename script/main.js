@@ -1,32 +1,115 @@
-let myLibrary = [];
-const author = document.querySelector('.author')
-const title = document.querySelector('.title')
-const bookPage = document.querySelector('.number')
-const read = document.querySelector('#dropdown')
-const myHeading = document.querySelector('h1')
-myHeading.textContent = "is it working"
+window.onload = function() {
+  myform = document.getElementById('myform')
 
-function Book(author, title, numOfPage, read) {
-	this.author = author;
-	this.title = title;
-	this.numOfPage = numOfPage;
-	this.read = read;
-}
+  dynamicHere= document.getElementById('dynamicHere')
+  cardBody = document.getElementsByClassName('cart-body')[0]
 
-function addBookToLibrary() {
-	if (author.value && title.value && bookPage.value && read.value) {
-		myLibrary.push(new Book(author.value, title.value, bookPage.value, read.value))
-		alert("Book added successfully")
+  myform.addEventListener('submit',function(e) {
+    e.preventDefault();
+    authorName = document.getElementById('authorName').value
+    bookName = document.getElementById('bookName').value
+    isbn = document.getElementById('isbn').value
 
-	} else {
-		alert("please enter all information")
-	}
-}
+    if(authorName == '' || bookName == '' || isbn == ''){
+      UI.messages('Enter All fields', 'Danger');
+      return
+    } else {
+      var book = new Book(authorName, bookName, isbn)
+          UI.displayData(book)
+          Store.setStored(book)
+          UI.clearfields()
+          UI.messages('Data inserted', 'success')
+    }
+  })
 
-submit.addEventListener('click', (e) => {
-	addBookToLibrary()
-})
+  dynamicHere.addEventListener('click', function(e){
+     UI.removeRow(e.target)
+  })
 
-function displayBooks() {
+  class Book {
+    constructor(authorName, bookName, isbn){
+    this.authorName = authorName
+    this.bookName = bookName
+    this.isbn = isbn
+    }
+  }
 
+  class UI {
+    static clearfields(){
+      document.getElementById('authorName').value = ''
+      document.getElementById('bookName').value = ''
+      document.getElementById('isbn').value = ''
+    }
+
+    static displayData(book) {
+     let books = Store.getstored()
+     books.push(book)
+      UI.PopulateRow(books)
+    }
+
+    static PopulateRow(books){
+      while(dynamicHere.firstChild){
+        dynamicHere.firstChild.remove(dynamicHere.firstChild)
+      }
+      books.forEach(everydata => {
+           dynamicHere.innerHTML += `
+        <tr>
+              <td>${everydata.isbn}</td>
+              <td>${everydata.authorName}</td>
+              <td>${everydata.bookName}</td>
+              <td><button class='btn btn-danger removeit'>Close</button></td>
+        </tr>`
+      })
+     
+    }
+
+    static messages(txt, className){
+      let div = document.createElement('div')
+      div.className = `alert alert - ${className}`
+      div.innerHTML = txt;
+      cardBody.insertBefore(div, myform)
+
+      setTimeout(function(){
+        div.remove()
+      }, 2000)
+    }
+
+    static removeRow(element){
+      if (element.classList.contains('removeit')){
+         let isbn = element.parentElement.parentElement.firstElementChild.innerText;
+        Store.removeStoredValue(isbn)
+        element.parentElement.parentElement.remove();
+      }
+    }
+  }
+
+  class Store {
+     static getstored(){
+       let books = ''
+       if (localStorage.getItem('book') == null){
+         books = []
+       } else {
+         books = JSON.parse(localStorage.getItem('book'))
+       }
+       return books
+     }
+
+     static setStored(obj){
+       let booksFromLocal = Store.getstored()
+       booksFromLocal.push(obj)
+       localStorage.setItem('book', JSON.stringify(booksFromLocal))
+     }
+
+     static removeStoredValue(isbn){
+       let Albooks = Store.getstored()
+       Albooks.forEach(function(everydata, index){
+         if(everydata.isbn == isbn){
+           Albooks.splice(index, 1)
+         }
+       })
+       localStorage.setItem('book', JSON.stringify(Albooks))
+     }
+  }
+
+  UI.PopulateRow(Store.getstored())
 }
