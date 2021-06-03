@@ -1,15 +1,18 @@
 table {
   width: 70%;
   margin: 0 auto;
-  box-sizing: border-box; }
-  table tr th {
-    width: 100px; }
+  box-sizing: border-box;
+}
+
+table tr th {
+  width: 100px;
+}
 
 .cart-body {
   width: 50%;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 .welcome {
-  text-align: center; }
-
-/*# sourceMappingURL=main.css.map */
+  text-align: center;
+}
