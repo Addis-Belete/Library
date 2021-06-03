@@ -1,54 +1,27 @@
-.welcome {
-	font-size: 25px;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	font-weight: 600;
-	margin-bottom: 20px;
-	padding: 20px;
-	text-align: center;
+.boddy {
+	background-image: url(assets/library-image.jpeg);
+
+}
+
+table {
+	width: 90%;
+	margin: 0 auto;
+
+	tr {
+		th {
+			width: 100px;
+		}
+	}
+
 }
 
 .cart-body {
-	height: 50vh;
-	display: block;
 	width: 50%;
 	margin: 0 auto;
 
-	form {
-		label {
-			color: orange;
-			height: 40px;
-			font-size: 25px;
-			font-family: Verdana, Geneva, Tahoma, sans-serif;
-			font-weight: 600;
+}
 
-		}
+.welcome {
+	text-align: center;
 
-		input {
-			width: 500px;
-			margin: 15px 0;
-			padding: 7px 10px;
-			border-radius: 10px;
-
-		}
-
-		button {
-			font-weight: 800;
-			color: orange;
-			border-radius: 6px;
-			width: 170px;
-			height: 40px;
-			font-size: 25px;
-			text-transform: uppercase;
-			cursor: pointer;
-			margin-bottom: 20px;
-			background-color: #daf6e6;
-			border: none;
-
-
-		}
-
-		button:hover {
-			color: #a17362;
-		}
-	}
 }

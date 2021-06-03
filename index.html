@@ -1,67 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Library</title>
-    <link rel="stylesheet" href="./assets/main.css" />
-    <link rel="stylesheet" href="./assets/reset.css" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
-  </head>
-  <body>
-    <div id="container">
-      <div class="control">
-        <h1 class="welcome">Welcome to the Library App</h1>
-      </div>
-      <div class="cart-body">
-        <form action="" id="myform">
-          <div class="form-group">
-            <label for="author">Author: </label> <br />
-            <input
-              type="text"
-              placeholder="Name of Author"
-              id="authorName"
-            /><br />
-          </div>
 
-          <div class="form-group">
-            <label for="">Title: </label><br />
-            <input
-              type="text"
-              placeholder="Name of Title"
-              id="bookName"
-            /><br />
-          </div>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Library</title>
+	<link rel="stylesheet" href="./assets/main.css" />
+	<link rel="stylesheet" href="./assets/reset.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+</head>
 
-          <div class="form-group">
-            <label for="isbn">Number of Page:</label>
-            <input type="text" id="isbn" class="form-control" />
-          </div>
+<body class  = "boddy">
+	<div id="container">
+		<div class="control">
+			<h1 class="welcome">Welcome to the Library App</h1>
+		</div>
+		<div class="cart-body">
+			<f orm action="" id="myform">
+				<div class="form-group">
+					<label for="author">Author: </label> <br />
+					<input type="text" placeholder="Name of Author" id="authorName" class="form-control" /><br />
+				</div>
 
-          <div class="form-group text-right">
-            <input type="submit" value="Add Book" class="btn btn-success" />
-          </div>
+				<div class="form-group">
+					<label for="">Title: </label><br />
+					<input type="text" placeholder="Name of Title" id="bookName" class="form-control"/><br />
+				</div>
 
-          <div class="card mt-3">
-            <table class="table">
-              <tr>
-                <th></th>
-                <th>Author</th>
-                <th>Bookname</th>
-                <th>Action</th>
-              </tr>
-              <tbody id="dynamicHere"></tbody>
-            </table>
-          </div>
-        </form>
-      </div>
-    </div>
-  </body>
-  <script src="./script/main.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+				<div class="form-group">
+					<label for="isbn">Number of Page:</label><br>
+					<input type="text" id="isbn" class="form-control" /><br>
+				</div>
+				<div class="form-group">
+					<select name="" id="dropdown" class="form-control">
+
+						<option value="" disabled selected value="">
+							Select an option
+						</option>
+
+						<option value="Read">Read</option>
+						<option value="Not Read">Not read</option>
+						<select><br />
+				</div>
+
+
+				<div class="form-group text-right ">
+					<input type="submit" value="Add Book" class="btn btn-success"  />
+				</div>
+
+				<div class="">
+					<table class = "table table-striped">
+<thead class = "thead-dark">
+						<tr>
+							<th scope = "col">Author</th>
+							<th scope = "col"> Bookname</th>
+							<th scope = "col">Page-num</th>
+							<th scope = "col">Read or Not</th>
+							<th scope = "col">Action</th>
+						</tr>
+</thead >
+
+						<tbody id="dynamicHere"></tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+<script src="./script/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </html>
