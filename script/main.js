@@ -1,44 +1,39 @@
 window.onload = function () {
   const myform = document.getElementById('myform');
-
   const dynamicHere = document.getElementById('dynamicHere');
   const cardBody = document.getElementsByClassName('cart-body')[0];
 
-  class Book {
-    constructor(authorName, bookName, isbn, read) {
-      this.authorName = authorName;
-      this.bookName = bookName;
-      this.isbn = isbn;
-      this.read = read;
+  function getstored() {
+    let books = '';
+    if (localStorage.getItem('book') == null) {
+      books = [];
+    } else {
+      books = JSON.parse(localStorage.getItem('book'));
     }
+    return books;
   }
 
-  class Store {
-    static getstored() {
-      let books = '';
-      if (localStorage.getItem('book') == null) {
-        books = [];
-      } else {
-        books = JSON.parse(localStorage.getItem('book'));
+  function setStored(obj) {
+    const booksFromLocal = getstored();
+    booksFromLocal.push(obj);
+    localStorage.setItem('book', JSON.stringify(booksFromLocal));
+  }
+
+  function removeStoredValue(isbn) {
+    const Albooks = getstored();
+    Albooks.forEach((everydata, index) => {
+      if (everydata.isbn === isbn) {
+        Albooks.splice(index, 1);
       }
-      return books;
-    }
+    });
+    localStorage.setItem('book', JSON.stringify(Albooks));
+  }
 
-    static setStored(obj) {
-      const booksFromLocal = Store.getstored();
-      booksFromLocal.push(obj);
-      localStorage.setItem('book', JSON.stringify(booksFromLocal));
-    }
-
-    static removeStoredValue(isbn) {
-      const Albooks = Store.getstored();
-      Albooks.forEach((everydata, index) => {
-        if (everydata.isbn === isbn) {
-          Albooks.splice(index, 1);
-        }
-      });
-      localStorage.setItem('book', JSON.stringify(Albooks));
-    }
+  function Book(authorName, bookName, isbn, read) {
+    this.authorName = authorName;
+    this.bookName = bookName;
+    this.isbn = isbn;
+    this.read = read;
   }
 
   class UI {
@@ -46,10 +41,11 @@ window.onload = function () {
       document.getElementById('authorName').value = '';
       document.getElementById('bookName').value = '';
       document.getElementById('isbn').value = '';
+      document.getElementById('dropdown').value = '';
     }
 
     static displayData(book) {
-      const books = Store.getstored();
+      const books = getstored();
       books.push(book);
       UI.PopulateRow(books);
     }
@@ -65,7 +61,7 @@ window.onload = function () {
               <td>${everydata.bookName}</td>
               <td>${everydata.isbn}</td>
 <td>${everydata.read}</td>
-              <td><button class='btn btn-danger removeit'>X</button></td>
+              <td><button class='btn btn-danger removeit'>Close</button></td>
         </tr>`;
       });
     }
@@ -84,7 +80,7 @@ window.onload = function () {
     static removeRow(element) {
       if (element.classList.contains('removeit')) {
         const isbn = element.parentElement.parentElement.firstElementChild.innerText;
-        Store.removeStoredValue(isbn);
+        removeStoredValue(isbn);
         element.parentElement.parentElement.remove();
       }
     }
@@ -102,7 +98,7 @@ window.onload = function () {
     } else {
       const book = new Book(authorName, bookName, isbn, bookRead);
       UI.displayData(book);
-      Store.setStored(book);
+      setStored(book);
       UI.clearfields();
       UI.messages('Data inserted', 'success');
     }
@@ -112,5 +108,5 @@ window.onload = function () {
     UI.removeRow(e.target);
   });
 
-  UI.PopulateRow(Store.getstored());
+  UI.PopulateRow(getstored());
 };
