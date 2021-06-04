@@ -3,24 +3,26 @@ window.onload = function () {
 	const dynamicHere = document.getElementById('dynamicHere');
 	const cardBody = document.getElementsByClassName('cart-body')[0];
 	const myLibrary = [];
-	function AddBookToLibrary() {
 
+
+	function addBookToLibrary() {
+		let mylibrary = '';
 		if (localStorage.getItem('book') == null) {
-			myLibrary = [];
+			mylibrary = [];
 		} else {
-			myLibrary = JSON.parse(localStorage.getItem('book'));
+			mylibrary = JSON.parse(localStorage.getItem('book'));
 		}
-		return books;
+		return mylibrary;
 	}
 
 	function setStored(obj) {
-		const booksFromLocal = AddBookToLibrary();
+		const booksFromLocal = addBookToLibrary();
 		booksFromLocal.push(obj);
 		localStorage.setItem('book', JSON.stringify(booksFromLocal));
 	}
 
 	function removeStoredValue(isbn) {
-		const Albooks = AddBookToLibrary();
+		const Albooks = addBookToLibrary();
 		Albooks.forEach((everydata, index) => {
 			if (everydata.isbn === isbn) {
 				Albooks.splice(index, 1);
@@ -45,7 +47,7 @@ window.onload = function () {
 		}
 
 		static displayData(book) {
-			const books = AddBookToLibrary();
+			const books = addBookToLibrary();
 			books.push(book);
 			UI.PopulateRow(books);
 		}
@@ -108,5 +110,5 @@ window.onload = function () {
 		UI.removeRow(e.target);
 	});
 
-	UI.PopulateRow(getstored());
+	UI.PopulateRow(addBookToLibrary());
 };
