@@ -2,7 +2,7 @@
 
 # Project Name :LibraryApp-V1
 
-> In this project, we built a basic web-based library application using JavaScript. One can add books to the library, delete the books and selects the book as weather read or not. We use local storage to store the data from the user.
+> In this project, we built a basic web-based library application using JavaScript. One can add books to the library, delete the books, and select the book as to whether read or not. We use local storage to store the data from the user.
 
 ![screenshot](assets/library-app.png)
 
