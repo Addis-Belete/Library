@@ -3,7 +3,13 @@ window.onload = function () {
 	const dynamicHere = document.getElementById('dynamicHere');
 	const cardBody = document.getElementsByClassName('cart-body')[0];
 	const myLibrary = [];
+	function Book(author, title, page, read) {
+		this.author = author;
+		this.title = title;
+		this.page = page;
+		this.read = read;
 
+	}
 
 	function addBookToLibrary() {
 		let mylibrary = '';
@@ -50,15 +56,6 @@ window.onload = function () {
 			document.getElementById('isbn').value = '';
 			document.getElementById('dropdown').value = '';
 		}
-
-	class UI {
-		static clearfields() {
-			document.getElementById('authorName').value = '';
-			document.getElementById('bookName').value = '';
-			document.getElementById('isbn').value = '';
-			document.getElementById('dropdown').value = '';
-		}
-
 		static displayData(book) {
 			const books = addBookToLibrary();
 			books.push(book);
@@ -75,7 +72,7 @@ window.onload = function () {
               <td>${everydata.authorName}</td>
               <td>${everydata.bookName}</td>
               <td>${everydata.isbn}</td>
-              <td><button class='btn btn-success '>${everydata.read}</button></td>
+              <td><button class='btn btn-success read_not'>${everydata.read}</button></td>
               <td><button class='btn btn-danger removeit'>Close</button></td>
         </tr>`;
 			});
@@ -99,6 +96,7 @@ window.onload = function () {
 				element.parentElement.parentElement.remove();
 			}
 		}
+
 	}
 
 	myform.addEventListener('submit', (e) => {
@@ -121,6 +119,7 @@ window.onload = function () {
 
 	dynamicHere.addEventListener('click', (e) => {
 		UI.removeRow(e.target);
+		UI.readOrNot(e.target);
 	});
 
 	UI.PopulateRow(addBookToLibrary());
