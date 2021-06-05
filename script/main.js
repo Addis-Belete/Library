@@ -36,19 +36,17 @@ window.onload = function () {
     this.read = read;
   }
 
-  function changeButton() {
+  const btn = document.getElementById("btn");
 
-    var btn = document.getElementById("dropdown");
+  btn.addEventListener("click", ()=>{
 
-    if (btn.value == "Read") {
-        btn.value = "NotRead";
-        btn.innerHTML = "NotRead";
+    if(btn.innerText === "Read"){
+        btn.innerText = "Not Read";
+    }else{
+        btn.innerText= "Read";
     }
-    else {
-        btn.value = "Read";
-        btn.innerHTML = "Read";
-    }
-}
+});
+
 
   class UI {
     static clearfields() {
@@ -74,7 +72,7 @@ window.onload = function () {
               <td>${everydata.authorName}</td>
               <td>${everydata.bookName}</td>
               <td>${everydata.isbn}</td>
-              <td><button class='btn btn-success addRead'>${everydata.read}</button></td>
+              <td><button class='btn btn-success '>${everydata.read}</button></td>
               <td><button class='btn btn-danger removeit'>Close</button></td>
         </tr>`;
       });
@@ -96,13 +94,6 @@ window.onload = function () {
         const isbn = element.parentElement.parentElement.firstElementChild.innerText;
         removeStoredValue(isbn);
         element.parentElement.parentElement.remove();
-      }
-    }
-
-    static addReadNot(element){
-      if(element.classList.contains('addRead')){
-        const isbn = element.parentElement.parentElement.firstElementChild.innerText;
-        changeButton(isbn);
       }
     }
   }
@@ -131,3 +122,4 @@ window.onload = function () {
 
   UI.PopulateRow(addBookToLibrary());
 };
+
