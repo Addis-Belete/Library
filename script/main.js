@@ -31,12 +31,25 @@ window.onload = function () {
 		localStorage.setItem('book', JSON.stringify(Albooks));
 	}
 
-	function Book(authorName, bookName, isbn, read) {
-		this.authorName = authorName;
-		this.bookName = bookName;
-		this.isbn = isbn;
-		this.read = read;
-	}
+	const btn = document.getElementById("btn");
+
+	btn.addEventListener("click", () => {
+
+		if (btn.innerText === "Read") {
+			btn.innerText = "Not Read";
+		} else {
+			btn.innerText = "Read";
+		}
+	});
+
+
+	class UI {
+		static clearfields() {
+			document.getElementById('authorName').value = '';
+			document.getElementById('bookName').value = '';
+			document.getElementById('isbn').value = '';
+			document.getElementById('dropdown').value = '';
+		}
 
 	class UI {
 		static clearfields() {
@@ -62,7 +75,7 @@ window.onload = function () {
               <td>${everydata.authorName}</td>
               <td>${everydata.bookName}</td>
               <td>${everydata.isbn}</td>
-<td>${everydata.read}</td>
+              <td><button class='btn btn-success '>${everydata.read}</button></td>
               <td><button class='btn btn-danger removeit'>Close</button></td>
         </tr>`;
 			});
@@ -112,3 +125,4 @@ window.onload = function () {
 
 	UI.PopulateRow(addBookToLibrary());
 };
+
