@@ -36,6 +36,20 @@ window.onload = function () {
     this.read = read;
   }
 
+  function changeButton() {
+
+    var btn = document.getElementById("dropdown");
+
+    if (btn.value == "Read") {
+        btn.value = "NotRead";
+        btn.innerHTML = "NotRead";
+    }
+    else {
+        btn.value = "Read";
+        btn.innerHTML = "Read";
+    }
+}
+
   class UI {
     static clearfields() {
       document.getElementById('authorName').value = '';
@@ -60,7 +74,7 @@ window.onload = function () {
               <td>${everydata.authorName}</td>
               <td>${everydata.bookName}</td>
               <td>${everydata.isbn}</td>
-<td>${everydata.read}</td>
+              <td><button class='btn btn-success addRead'>${everydata.read}</button></td>
               <td><button class='btn btn-danger removeit'>Close</button></td>
         </tr>`;
       });
@@ -82,6 +96,13 @@ window.onload = function () {
         const isbn = element.parentElement.parentElement.firstElementChild.innerText;
         removeStoredValue(isbn);
         element.parentElement.parentElement.remove();
+      }
+    }
+
+    static addReadNot(element){
+      if(element.classList.contains('addRead')){
+        const isbn = element.parentElement.parentElement.firstElementChild.innerText;
+        changeButton(isbn);
       }
     }
   }
