@@ -2,23 +2,21 @@ window.onload = function () {
 	const myform = document.getElementById('myform');
 	const dynamicHere = document.getElementById('dynamicHere');
 	const cardBody = document.getElementsByClassName('cart-body')[0];
-	const myLibrary = [];
-	function Book(author, title, page, read) {
-		this.author = author;
-		this.title = title;
-		this.page = page;
+	let myLibrary = [];
+	function Book(authorName, bookName, isbn, read) {
+		this.authorName = authorName;
+		this.bookName = bookName;
+		this.isbn = isbn;
 		this.read = read;
-
 	}
-
 	function addBookToLibrary() {
-		let mylibrary = '';
+
 		if (localStorage.getItem('book') == null) {
-			mylibrary = [];
+			myLibrary
 		} else {
-			mylibrary = JSON.parse(localStorage.getItem('book'));
+			myLibrary = JSON.parse(localStorage.getItem('book'));
 		}
-		return mylibrary;
+		return myLibrary
 	}
 
 	function setStored(obj) {
@@ -32,22 +30,12 @@ window.onload = function () {
 		Albooks.forEach((everydata, index) => {
 			if (everydata.isbn === isbn) {
 				Albooks.splice(index, 1);
+
 			}
 		});
+
 		localStorage.setItem('book', JSON.stringify(Albooks));
 	}
-
-	const btn = document.getElementById("btn");
-
-	btn.addEventListener("click", () => {
-
-		if (btn.innerText === "Read") {
-			btn.innerText = "Not Read";
-		} else {
-			btn.innerText = "Read";
-		}
-	});
-
 
 	class UI {
 		static clearfields() {
@@ -72,8 +60,8 @@ window.onload = function () {
               <td>${everydata.authorName}</td>
               <td>${everydata.bookName}</td>
               <td>${everydata.isbn}</td>
-              <td><button class='btn btn-success read_not'>${everydata.read}</button></td>
-              <td><button class='btn btn-danger removeit'>Close</button></td>
+              <td><input type = "button" value ="${everydata.read}"  class='btn btn-success' onclick="return change(this);"> </td>
+              <td><button class='btn btn-danger removeit' >Delete</button></td>
         </tr>`;
 			});
 		}
@@ -93,7 +81,9 @@ window.onload = function () {
 			if (element.classList.contains('removeit')) {
 				const isbn = element.parentElement.parentElement.firstElementChild.innerText;
 				removeStoredValue(isbn);
+				localStorage.clear(isbn)
 				element.parentElement.parentElement.remove();
+
 			}
 		}
 
@@ -119,9 +109,15 @@ window.onload = function () {
 
 	dynamicHere.addEventListener('click', (e) => {
 		UI.removeRow(e.target);
-		UI.readOrNot(e.target);
+
 	});
 
 	UI.PopulateRow(addBookToLibrary());
 };
 
+function change(el) {
+	if (el.value === "Read")
+		el.value = "Not Read";
+	else
+		el.value = "Read";
+}
