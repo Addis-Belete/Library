@@ -1,15 +1,16 @@
-/* eslint-disable no-unused-vars */
 window.onload = function () {
   const myform = document.getElementById('myform');
   const dynamicHere = document.getElementById('dynamicHere');
   const cardBody = document.getElementsByClassName('cart-body')[0];
   let myLibrary = [];
+
   function Book(authorName, bookName, isbn, read) {
     this.authorName = authorName;
     this.bookName = bookName;
     this.isbn = isbn;
     this.read = read;
   }
+
   function addBookToLibrary() {
     if (localStorage.getItem('book') == null) {
       myLibrary = [];
@@ -60,7 +61,7 @@ window.onload = function () {
               <td>${everydata.authorName}</td>
               <td>${everydata.bookName}</td>
               <td>${everydata.isbn}</td>
-              <td><input type = "button" value ="${everydata.read}"  class='btn btn-success' onclick="return change(this);"> </td>
+              <td><input type = "button" value ="${everydata.read}" class='btn btn-success' onclick="return change(this);"> </td>
               <td><button class='btn btn-danger removeit' >Delete</button></td>
         </tr>`;
       });
@@ -112,8 +113,9 @@ window.onload = function () {
   UI.PopulateRow(addBookToLibrary());
 };
 
+/* eslint-disable */
 function change(el) {
   if (el.value === 'Read') el.value = 'Not Read';
   else el.value = 'Read';
 }
-/* eslint-enable no-unused-vars */
+/* eslint-enable */
